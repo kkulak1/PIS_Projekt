@@ -8,17 +8,17 @@ pipeline {
     stages {
         stage('Building') {
             steps {
-                echo 'Hello World'
-                sh "mvn clean compile"
+                sh "echo 'Hello World'"
+//                 sh "mvn clean compile"
             }
         }
 
-        stage('Testing') {
-            steps {
-                echo 'Hello World'
-                sh "mvn test"
-            }
-        }
+//         stage('Testing') {
+//             steps {
+//                 echo 'Hello World'
+//                 sh "mvn test"
+//             }
+//         }
 
 
     }
