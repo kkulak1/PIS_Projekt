@@ -23,7 +23,6 @@ pipeline {
                     echo "Build success"
                 }
             }
-
         }
 
     }
