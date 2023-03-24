@@ -13,11 +13,27 @@ pipeline {
                 powershell "mvn clean"
             }
         }
+        post {
+            echo "Successful cleaning"
+        }
 
         stage('Building') {
             steps {
                 powershell "mvn compile"
             }
         }
+
+        post {
+            echo "Successful building"
+        }
+//         stage('Building') {
+//             steps {
+//                 powershell "mvn compile"
+//             }
+//         }
+
+    }
+    post {
+        echo "Triumph"
     }
 }
