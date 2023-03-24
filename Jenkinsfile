@@ -10,14 +10,13 @@ pipeline {
     stages {
         stage("Cleaning") {
             steps {
-                sh "ls"
-                sh "mvn clean"
+                bat "echo Hello"
             }
         }
 
         stage('Building') {
             steps {
-                sh "mvn compile"
+                bat "echo Hello"
             }
         }
     }
