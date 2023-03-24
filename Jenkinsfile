@@ -18,11 +18,18 @@ pipeline {
             steps {
                 powershell "mvn compile"
             }
+            post {
+                success  {
+                    echo "Build success"
+                }
+            }
+
         }
+
     }
     post {
         success  {
-            echo "Triumph"
+            echo "triumph"
         }
     }
 }
