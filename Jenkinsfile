@@ -13,20 +13,9 @@ pipeline {
                 powershell "mvn clean"
             }
         }
-        post {
-            success {
-                echo "Successful cleaning"
-            }
-        }
 
         stage('Building') {
             powershell "mvn compile"
-        }
-
-        post {
-            success {
-                echo "Successful building"
-            }
         }
     }
     post {
