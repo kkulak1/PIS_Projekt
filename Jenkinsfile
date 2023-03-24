@@ -14,26 +14,24 @@ pipeline {
             }
         }
         post {
-            echo "Successful cleaning"
-        }
-
-        stage('Building') {
-            steps {
-                powershell "mvn compile"
+            success {
+                echo "Successful cleaning"
             }
         }
 
-        post {
-            echo "Successful building"
+        stage('Building') {
+            powershell "mvn compile"
         }
-//         stage('Building') {
-//             steps {
-//                 powershell "mvn compile"
-//             }
-//         }
 
+        post {
+            success {
+                echo "Successful building"
+            }
+        }
     }
     post {
-        echo "Triumph"
+        success  {
+            echo "Triumph"
+        }
     }
 }
