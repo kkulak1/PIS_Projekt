@@ -11,6 +11,7 @@ pipeline {
         stage("Cleaning") {
             steps {
                 bat "echo Hello"
+                bat "mvn clean"
             }
         }
 
