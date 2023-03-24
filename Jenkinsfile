@@ -15,7 +15,9 @@ pipeline {
         }
 
         stage('Building') {
-            powershell "mvn compile"
+            steps {
+                powershell "mvn compile"
+            }
         }
     }
     post {
