@@ -1,0 +1,91 @@
+pipeline {
+    agent any
+
+    options {
+        buildDiscarder(logRotator(daysToKeepStr: '7', artifactDaysToKeepStr: '7'))
+    }
+
+    environment {
+        LABEL = "[${params.GERRIT_PROJECT}]"
+        BUILD_TAG = "change-${params.GERRIT_CHANGE_NUMBER}-${params.GERRIT_PATCHSET_NUMBER}"
+    }
+
+    tools {
+        maven 'maven-3'
+        jdk 'jdk-17'
+        git 'Default'
+    }
+
+    triggers {
+        gerrit(
+                gerritProjects: [[
+                                         compareType: 'PLAIN',
+                                         pattern    : 'xxxx',
+                                         branches   : [[compareType: 'REG_EXP', pattern: '.*']]
+                                 ],
+                triggerOnEvents: [[
+                                          $class              : 'PluginPatchsetCreatedEvent',
+                                          excludeDrafts       : false,
+                                          excludeTrivialRebase: false,
+                                          excludeNoCodeChange : false
+                                  ]]
+        )
+    }
+
+    stages {
+        stage('Clean') {
+            steps {
+                gerritReview labels: [Verified: 0]
+                cleanWs()
+            }
+        }
+
+        stage('Checkout') {
+            environment {
+                CHANGE_BRANCH = "change-${params.GERRIT_CHANGE_NUMBER}-${params.GERRIT_PATCHSET_NUMBER}"
+            }
+            steps {
+                git url: "ssh://xxx@${params.GERRIT_HOST}:${params.GERRIT_PORT}/${params.GERRIT_PROJECT}.git"
+                sh "git fetch origin ${params.GERRIT_REFSPEC}:$CHANGE_BRANCH"
+                sh 'git checkout $CHANGE_BRANCH'
+            }
+        }
+
+        stage('Build') {
+            steps {
+                configFileProvider([configFile(fileId: 'nexus-site', variable: 'MAVEN_SETTINGS_XML')]) {
+                    sh 'mvn -s $MAVEN_SETTINGS_XML clean verify -U'
+                }
+            }
+        }
+    }
+
+    post {
+        always {
+            junit allowEmptyResults: true, testResults: '**/target/**/TEST-*.xml'
+        }
+        success {
+            gerritReview labels: [Verified: 1]
+            notify(":heart_eyes: $LABEL build *$BUILD_TAG* has successfully ended (<${env.BUILD_URL}|Open>)")
+        }
+        unstable {
+            gerritReview labels: [Verified: 0], message: 'Build is unstable'
+            notify('warning', ":bride_with_veil: $LABEL build *$BUILD_TAG* is unstable (<${env.BUILD_URL}|Open>)")
+        }
+        failure {
+            gerritReview labels: [Verified: -1]
+            notify('danger', ":bride_with_veil: $LABEL build *$BUILD_TAG* has failures (<${env.BUILD_URL}|Open>)")
+        }
+    }
+}
+
+def notify(def color = 'good', def message) {
+    slackSend(
+            channel: 'xxx',
+            color: color,
+            message: message,
+            teamDomain: 'xxx',
+            tokenCredentialId: 'xxx',
+            username: 'xxx'
+    )
+}

@@ -2,25 +2,23 @@ pipeline {
     agent any
 
     tools {
+        jdk 'jdk-17'
         maven "M3"
+        git "Default"
     }
 
     stages {
-        stage('Building') {
+        stage("Cleaning") {
             steps {
-                sh "echo 'Hello World'"
+                sh "ls"
                 sh "mvn clean"
-                sh "mvn compile"
             }
         }
 
-//         stage('Testing') {
-//             steps {
-//                 echo 'Hello World'
-//                 sh "mvn test"
-//             }
-//         }
-
-
+        stage('Building') {
+            steps {
+                sh "mvn compile"
+            }
+        }
     }
 }

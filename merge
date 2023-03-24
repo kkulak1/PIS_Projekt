@@ -1,0 +1,72 @@
+pipeline {
+    agent any
+
+    options {
+        buildDiscarder(logRotator(daysToKeepStr: '7', artifactDaysToKeepStr: '7'))
+    }
+
+    environment {
+        LABEL = "[${params.GERRIT_PROJECT}]"
+    }
+
+    tools {
+        maven 'maven-3'
+        jdk 'jdk-17'
+        git 'Default'
+    }
+
+    triggers {
+        gerrit(
+                gerritProjects: [[
+                                         compareType: 'PLAIN',
+                                         pattern    : 'xxx',
+                                         branches   : [[compareType: 'REG_EXP', pattern: '.*']]
+                                 ],
+                triggerOnEvents: [[
+                                          $class: 'PluginChangeMergedEvent'
+                                  ]]
+        )
+    }
+
+    stages {
+        stage('Clean') {
+            steps {
+                cleanWs()
+            }
+        }
+
+        stage('Checkout') {
+            steps {
+                git url: "ssh://xxx@${params.GERRIT_HOST}:${params.GERRIT_PORT}/${params.GERRIT_PROJECT}.git", branch: params.GERRIT_BRANCH
+            }
+        }
+
+        stage('Deploy') {
+            steps {
+                configFileProvider([configFile(fileId: 'nexus-site', variable: 'MAVEN_SETTINGS_XML')]) {
+                    sh 'mvn -s $MAVEN_SETTINGS_XML deploy -DskipTests -U'
+                    script {
+                        version = sh(script: 'mvn help:evaluate -Dexpression=project.version -q -DforceStdout', returnStdout: true).trim()
+                    }
+                }
+            }
+        }
+    }
+
+    post {
+        success {
+            notify(":success-kid: $LABEL Branch: *origin/${params.GERRIT_BRANCH}* - version: *${version}* released to snapshot repository")
+        }
+    }
+}
+
+def notify(def color = 'good', def message) {
+    slackSend(
+            channel: 'xxx',
+            color: color,
+            message: message,
+            teamDomain: 'xxx',
+            tokenCredentialId: 'xxx',
+            username: 'xxx'
+    )
+}
