@@ -10,14 +10,13 @@ pipeline {
     stages {
         stage("Cleaning") {
             steps {
-                bat "echo Hello"
-                bat "mvn clean"
+                powershell "mvn clean"
             }
         }
 
         stage('Building') {
             steps {
-                bat "echo Hello"
+                powershell "mvn compile"
             }
         }
     }
