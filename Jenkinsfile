@@ -22,7 +22,7 @@ pipeline {
             credentialsId: "github",
             context: 'Jenkins',
             description: 'Build failed',
-            repo: "PIS_projekt"
+            repo: "PIS_projekt",
             sha: env.GITHUB_SHA
         )
     }
@@ -33,7 +33,7 @@ pipeline {
             credentialsId: "github",
             context: 'Jenkins',
             description: 'Build failed',
-            repo: "PIS_projekt"
+            repo: "PIS_projekt",
             sha: env.GITHUB_SHA
            )
       }
