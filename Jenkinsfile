@@ -1,6 +1,12 @@
 pipeline {
   agent any
 
+  tools {
+      jdk 'jdk-17'
+      maven "M3"
+      git "Default"
+  }
+
   environment {
     gitUrl = "${env.GITHUB_SERVER_URL}/${env.GITHUB_REPOSITORY}.git"
     commitSha = "${env.GITHUB_SHA}"
