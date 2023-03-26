@@ -7,12 +7,6 @@ pipeline {
       git "Default"
   }
 
-  environment {
-    gitUrl = "https://github.com/kkulak1/PIS_projekt.git"
-    commitSha = "${env.GITHUB_SHA}"
-    GITHUB_REPO_OWNER = 'kkulak1'
-  }
-
   stages {
     stage('Build') {
       steps {
@@ -26,23 +20,21 @@ pipeline {
           status: 'SUCCESS',
           context: 'Jenkins',
           description: 'Build successful',
-          repo: gitUrl,
+          repo: "https://github.com/kkulak1/PIS_projekt.git",
           credentialsId: "github",
-          account: env.GITHUB_REPO_OWNER
+          account: "kkulak1"
          )
     }
     failure {
           echo "asdasdas"
+          githubNotify(
+            status: 'FAILURE',
+            context: 'Jenkins',
+            description: 'Build failed',
+            repo: "https://github.com/kkulak1/PIS_projekt.git",
+            credentialsId: "github",
+            account: "kkulak1"
+           )
       }
-//         if (env.GITHUB_REPO_OWNER) {
-//           githubNotify(
-//             status: 'FAILURE',
-//             context: 'Jenkins',
-//             description: 'Build failed',
-//             repo: gitUrl,
-//             credentialsId: "github",
-//             account: env.GITHUB_REPO_OWNER,
-//             sha: commitSha
-//           )
     }
   }
