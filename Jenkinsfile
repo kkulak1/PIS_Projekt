@@ -24,36 +24,41 @@ pipeline {
   post {
     success {
       script {
-        if (env.GITHUB_REPO_OWNER) {
-          githubNotify(
-            status: 'SUCCESS',
-            context: 'Jenkins',
-            description: 'Build successful',
-            repo: gitUrl,
-            credentialsId: "github",
-            account: env.GITHUB_REPO_OWNER,
-            sha: commitSha
-          )
-        } else {
-          echo 'GITHUB_REPO_OWNER environment variable is not set, cannot notify GitHub'
-        }
+        echo giturl
+        echo env.github_repo_owner
+        echo commitsha
+//         if (env.GITHUB_REPO_OWNER) {
+//           githubNotify(
+//             status: 'SUCCESS',
+//             context: 'Jenkins',
+//             description: 'Build successful',
+//             repo: gitUrl,
+//             credentialsId: "github",
+//             account: env.GITHUB_REPO_OWNER,
+//             sha: commitSha
+//           )
+//         } else {
+//           echo 'GITHUB_REPO_OWNER environment variable is not set, cannot notify GitHub'
+//         }
       }
     }
     failure {
-      script {
-        if (env.GITHUB_REPO_OWNER) {
-          githubNotify(
-            status: 'FAILURE',
-            context: 'Jenkins',
-            description: 'Build failed',
-            repo: gitUrl,
-            credentialsId: "github",
-            account: env.GITHUB_REPO_OWNER,
-            sha: commitSha
-          )
-        } else {
-          echo 'GITHUB_REPO_OWNER environment variable is not set, cannot notify GitHub'
-        }
+          echo "asdasdas"
+
+//       script {
+//         if (env.GITHUB_REPO_OWNER) {
+//           githubNotify(
+//             status: 'FAILURE',
+//             context: 'Jenkins',
+//             description: 'Build failed',
+//             repo: gitUrl,
+//             credentialsId: "github",
+//             account: env.GITHUB_REPO_OWNER,
+//             sha: commitSha
+//           )
+//         } else {
+//           echo 'GITHUB_REPO_OWNER environment variable is not set, cannot notify GitHub'
+//         }
       }
     }
   }
