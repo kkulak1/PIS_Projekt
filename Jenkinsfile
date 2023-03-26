@@ -10,7 +10,7 @@ pipeline {
   environment {
     gitUrl = "${env.GITHUB_SERVER_URL}/${env.GITHUB_REPOSITORY}.git"
     commitSha = "${env.GITHUB_SHA}"
-    githubToken = "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"
+    githubToken = credentials('github-token')
   }
 
   stages {
