@@ -10,13 +10,13 @@ pipeline {
   stages {
     stage("Cleaning") {
         steps {
-            powershell "mvn clean"
+            sh "mvn clean"
         }
     }
 
     stage('Building') {
         steps {
-            powershell "mvn compile"
+            sh "mvn compile"
         }
     }
   }
