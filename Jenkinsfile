@@ -2,9 +2,9 @@ pipeline {
   agent any
 
   tools {
-      jdk 'jdk-17'
-      maven "M3"
-      git "Default"
+    jdk 'jdk-17'
+    maven 'M3'
+    git 'Default'
   }
 
   environment {
@@ -14,39 +14,39 @@ pipeline {
   }
 
   stages {
-    stage("verifying") {
-        steps {
-            sh "mvn verify"
-        }
+    stage('verify') {
+      steps {
+        sh 'mvn verify'
+      }
     }
   }
 
   post {
-    success  {
+    success {
       script {
-        def status = new GitHubStatus()
-        status.notifyBuildStatus(
-          status: "SUCCESS",
-          message: "Build Successful",
-          url: env.BUILD_URL,
-          gitUrl: gitUrl,
-          commitSha: commitSha,
-          githubToken: githubToken
-        )
+        ghStatus = ghprbGitHubCommitStatus {
+          context = 'Jenkins'
+          description = 'Build successful'
+          sha = commitSha
+          state = 'SUCCESS'
+          targetUrl = env.BUILD_URL
+          oauthToken = githubToken
+        }
+        ghStatus.create()
       }
     }
 
-    failure  {
+    failure {
       script {
-        def status = new GitHubStatus()
-        status.notifyBuildStatus(
-          status: "FAILURE",
-          message: "Build Failed",
-          url: env.BUILD_URL,
-          gitUrl: gitUrl,
-          commitSha: commitSha,
-          githubToken: githubToken
-        )
+        ghStatus = ghprbGitHubCommitStatus {
+          context = 'Jenkins'
+          description = 'Build failed'
+          sha = commitSha
+          state = 'FAILURE'
+          targetUrl = env.BUILD_URL
+          oauthToken = githubToken
+        }
+        ghStatus.create()
       }
     }
   }
