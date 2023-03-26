@@ -23,30 +23,10 @@ pipeline {
 
   post {
     success {
-      script {
-        ghStatus = ghprbGitHubCommitStatus {
-          context = 'Jenkins'
-          description = 'Build successful'
-          sha = commitSha
-          state = 'SUCCESS'
-          targetUrl = env.BUILD_URL
-          oauthToken = githubToken
-        }
-        ghStatus.create()
-      }
+      githubNotify status: 'SUCCESS', context: 'Jenkins', description: 'Build successful'
     }
     failure {
-      script {
-        ghStatus = ghprbGitHubCommitStatus {
-          context = 'Jenkins'
-          description = 'Build failed'
-          sha = commitSha
-          state = 'FAILURE'
-          targetUrl = env.BUILD_URL
-          oauthToken = githubToken
-        }
-        ghStatus.create()
-      }
+      githubNotify status: 'FAILURE', context: 'Jenkins', description: 'Build failed'
     }
-  }
+}
 }
