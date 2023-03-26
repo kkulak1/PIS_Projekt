@@ -26,12 +26,11 @@ pipeline {
          )
     }
     failure {
-          echo "asdasdas"
           githubNotify(
             status: 'FAILURE',
             context: 'Jenkins',
             description: 'Build failed',
-            repo: "https://github.com/kkulak1/PIS_projekt.git",
+            repo: "kkulak1/PIS_projekt",
             credentialsId: "github",
             account: "kkulak1"
            )
