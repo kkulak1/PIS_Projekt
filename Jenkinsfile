@@ -8,9 +8,8 @@ pipeline {
   }
 
   environment {
-    gitUrl = "${env.GITHUB_SERVER_URL}/${env.GITHUB_REPOSITORY}.git"
+    gitUrl = "https://github.com/kkulak1/PIS_projekt"
     commitSha = "${env.GITHUB_SHA}"
-    githubToken = credentials('github-token')
     GITHUB_REPO_OWNER = 'kkulak1'
   }
 
@@ -23,29 +22,18 @@ pipeline {
   }
   post {
     success {
-      script {
-        echo env.gitUrl
-        echo env.github_repo_owner
-        echo env.commitSha
-//         if (env.GITHUB_REPO_OWNER) {
-//           githubNotify(
-//             status: 'SUCCESS',
-//             context: 'Jenkins',
-//             description: 'Build successful',
-//             repo: gitUrl,
-//             credentialsId: "github",
-//             account: env.GITHUB_REPO_OWNER,
-//             sha: commitSha
-//           )
-//         } else {
-//           echo 'GITHUB_REPO_OWNER environment variable is not set, cannot notify GitHub'
-//         }
-      }
+        githubNotify(
+          status: 'SUCCESS',
+          context: 'Jenkins',
+          description: 'Build successful',
+          repo: gitUrl,
+          credentialsId: "github",
+          account: env.GITHUB_REPO_OWNER
+         )
     }
     failure {
           echo "asdasdas"
-
-//       script {
+      }
 //         if (env.GITHUB_REPO_OWNER) {
 //           githubNotify(
 //             status: 'FAILURE',
@@ -56,10 +44,5 @@ pipeline {
 //             account: env.GITHUB_REPO_OWNER,
 //             sha: commitSha
 //           )
-//         } else {
-//           echo 'GITHUB_REPO_OWNER environment variable is not set, cannot notify GitHub'
-//         }
-      }
     }
   }
-// }
