@@ -23,17 +23,19 @@ pipeline {
             context: 'Jenkins',
             description: 'Build failed',
             repo: "PIS_projekt"
+            sha: env.GITHUB_SHA
         )
     }
-//     failure {
-//           githubNotify(
-//             status: 'FAILURE',
-//             account: "kkulak1",
-//             credentialsId: "github",
-//             context: 'Jenkins',
-//             description: 'Build failed',
-//             repo: "Default"
-//            )
-//       }
+    failure {
+          githubNotify(
+            status: 'SUCCESS',
+            account: "kkulak1",
+            credentialsId: "github",
+            context: 'Jenkins',
+            description: 'Build failed',
+            repo: "PIS_projekt"
+            sha: env.GITHUB_SHA
+           )
+      }
     }
   }
