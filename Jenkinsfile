@@ -23,7 +23,7 @@ pipeline {
             context: 'Jenkins',
             description: 'Build failed',
             repo: "PIS_projekt",
-            sha: env.GITHUB_SHA
+            sha: "${env.GITHUB_SHA}"
         )
     }
     failure {
@@ -34,7 +34,7 @@ pipeline {
             context: 'Jenkins',
             description: 'Build failed',
             repo: "PIS_projekt",
-            sha: env.GITHUB_SHA
+            sha: "${env.GITHUB_SHA}"
            )
       }
     }
