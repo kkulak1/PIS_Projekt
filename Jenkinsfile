@@ -20,7 +20,7 @@ pipeline {
           status: 'SUCCESS',
           context: 'Jenkins',
           description: 'Build successful',
-          repo: "https://github.com/kkulak1/PIS_projekt.git",
+          repo: "kkulak1/PIS_projekt",
           credentialsId: "github",
           account: "kkulak1"
          )
