@@ -11,6 +11,7 @@ pipeline {
     gitUrl = "${env.GITHUB_SERVER_URL}/${env.GITHUB_REPOSITORY}.git"
     commitSha = "${env.GITHUB_SHA}"
     githubToken = credentials('github-token').toString()
+    GITHUB_REPO_OWNER = 'kkulak1'
   }
 
   stages {
