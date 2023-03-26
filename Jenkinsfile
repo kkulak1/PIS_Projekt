@@ -8,7 +8,7 @@ pipeline {
   }
 
   environment {
-    gitUrl = "https://github.com/kkulak1/PIS_projekt"
+    gitUrl = "https://github.com/kkulak1/PIS_projekt.git"
     commitSha = "${env.GITHUB_SHA}"
     GITHUB_REPO_OWNER = 'kkulak1'
   }
