@@ -1,3 +1,6 @@
+@Library('github.com/kohsuke/github-api') _
+import org.kohsuke.github.GitHub
+
 pipeline {
   agent any
 
@@ -24,7 +27,6 @@ pipeline {
   post {
     success  {
       script {
-        import org.kohsuke.github.GitHub
         def gitHub = github()
         gitHub.setCommitStatus(
           context: "Jenkins",
@@ -41,7 +43,6 @@ pipeline {
 
     failure  {
       script {
-        import org.kohsuke.github.GitHub
         def gitHub = github()
         gitHub.setCommitStatus(
           context: "Jenkins",
