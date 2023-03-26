@@ -47,6 +47,7 @@ pipeline {
           repoOwner: env.GITHUB_REPOSITORY_OWNER,
           repository: env.GITHUB_REPOSITORY,
           oauthToken: "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"
+        )
       }
     }
   }
