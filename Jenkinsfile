@@ -24,6 +24,7 @@ pipeline {
   post {
     success  {
       script {
+        import org.kohsuke.github.GitHub
         def gitHub = github()
         gitHub.setCommitStatus(
           context: "Jenkins",
@@ -40,6 +41,7 @@ pipeline {
 
     failure  {
       script {
+        import org.kohsuke.github.GitHub
         def gitHub = github()
         gitHub.setCommitStatus(
           context: "Jenkins",
