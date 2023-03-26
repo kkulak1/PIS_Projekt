@@ -30,7 +30,7 @@ pipeline {
     failure {
 //         echo "${env.GIT_COMMIT}"
           githubNotify(
-            status: 'SUCCESS',
+            status: 'FAILURE',
             account: "kkulak1",
             credentialsId: "github",
             context: 'Jenkins',
