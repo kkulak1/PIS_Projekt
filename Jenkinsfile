@@ -20,7 +20,7 @@ pipeline {
           status: 'SUCCESS',
           context: 'Jenkins',
           description: 'Build successful',
-          repo: "kkulak1/PIS_projekt",
+          repo: "Default",
           credentialsId: "github",
           account: "kkulak1"
          )
@@ -30,7 +30,7 @@ pipeline {
             status: 'FAILURE',
             context: 'Jenkins',
             description: 'Build failed',
-            repo: "kkulak1/PIS_projekt",
+            repo: "Default",
             credentialsId: "github",
             account: "kkulak1"
            )
