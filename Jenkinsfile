@@ -18,7 +18,7 @@ pipeline {
     success {
         githubNotify(
             status: 'FAILURE',
-            account: "kkulak1"
+            account: "kkulak1",
             credentialsId: "github",
             context: 'Jenkins',
             description: 'Build failed',
@@ -28,7 +28,7 @@ pipeline {
     failure {
           githubNotify(
             status: 'FAILURE',
-            account: "kkulak1"
+            account: "kkulak1",
             credentialsId: "github",
             context: 'Jenkins',
             description: 'Build failed',
