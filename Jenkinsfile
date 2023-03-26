@@ -35,7 +35,6 @@ pipeline {
         ghStatus.create()
       }
     }
-
     failure {
       script {
         ghStatus = ghprbGitHubCommitStatus {
