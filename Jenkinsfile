@@ -10,7 +10,7 @@ pipeline {
   environment {
     gitUrl = "${env.GITHUB_SERVER_URL}/${env.GITHUB_REPOSITORY}.git"
     commitSha = "${env.GITHUB_SHA}"
-    githubToken = credentials('github-token').toString()
+    githubToken = credentials('github-token')
     GITHUB_REPO_OWNER = 'kkulak1'
   }
 
@@ -31,7 +31,7 @@ pipeline {
             context: 'Jenkins',
             description: 'Build successful',
             repo: gitUrl,
-            credentialsId: 'github-token',
+            credentialsId: githubToken,
             account: env.GITHUB_REPO_OWNER,
             sha: commitSha
           )
@@ -48,7 +48,7 @@ pipeline {
             context: 'Jenkins',
             description: 'Build failed',
             repo: gitUrl,
-            credentialsId: 'github-token',
+            credentialsId: githubToken,
             account: env.GITHUB_REPO_OWNER,
             sha: commitSha
           )
