@@ -7,6 +7,12 @@ pipeline {
       git "Default"
   }
 
+  environment {
+    gitUrl = "${env.GITHUB_SERVER_URL}/${env.GITHUB_REPOSITORY}.git"
+    commitSha = env.GITHUB_SHA
+    githubToken = "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"
+  }
+
   stages {
     stage("verifying") {
         steps {
@@ -14,11 +20,10 @@ pipeline {
         }
     }
   }
+
   post {
     success  {
       script {
-        def gitUrl = "${env.GITHUB_SERVER_URL}/${env.GITHUB_REPOSITORY}.git"
-        def commitSha = env.GITHUB_SHA
         def gitHub = github()
         gitHub.setCommitStatus(
           context: "Jenkins",
@@ -28,25 +33,23 @@ pipeline {
           sha1: commitSha,
           repoOwner: env.GITHUB_REPOSITORY_OWNER,
           repository: env.GITHUB_REPOSITORY,
-          oauthToken: "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"
+          oauthToken: githubToken
         )
       }
     }
 
     failure  {
       script {
-        def gitUrl = "${env.GITHUB_SERVER_URL}/${env.GITHUB_REPOSITORY}.git"
-        def commitSha = env.GITHUB_SHA
         def gitHub = github()
         gitHub.setCommitStatus(
           context: "Jenkins",
           state: "FAILURE",
           targetUrl: "${env.BUILD_URL}",
-          description: "Build Successful",
+          description: "Build Failed",
           sha1: commitSha,
           repoOwner: env.GITHUB_REPOSITORY_OWNER,
           repository: env.GITHUB_REPOSITORY,
-          oauthToken: "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"
+          oauthToken: githubToken
         )
       }
     }
