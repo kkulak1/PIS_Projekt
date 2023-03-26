@@ -8,56 +8,46 @@ pipeline {
   }
 
   stages {
-    stage("Cleaning") {
+    stage("verifying") {
         steps {
-            sh "mvn clean"
-        }
-    }
-
-    stage('Building') {
-        steps {
-            sh "mvn compile"
+            sh "mvn verify"
         }
     }
   }
   post {
     success  {
-        echo "triumph"
+      script {
+        def gitUrl = "${env.GITHUB_SERVER_URL}/${env.GITHUB_REPOSITORY}.git"
+        def commitSha = env.GITHUB_SHA
+        def gitHub = github()
+        gitHub.setCommitStatus(
+          context: "Jenkins",
+          state: "SUCCESS",
+          targetUrl: "${env.BUILD_URL}",
+          description: "Build Successful",
+          sha1: commitSha,
+          repoOwner: env.GITHUB_REPOSITORY_OWNER,
+          repository: env.GITHUB_REPOSITORY,
+          oauthToken: "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"
+        )
+      }
+    }
+
+    failure  {
+      script {
+        def gitUrl = "${env.GITHUB_SERVER_URL}/${env.GITHUB_REPOSITORY}.git"
+        def commitSha = env.GITHUB_SHA
+        def gitHub = github()
+        gitHub.setCommitStatus(
+          context: "Jenkins",
+          state: "FAILURE",
+          targetUrl: "${env.BUILD_URL}",
+          description: "Build Successful",
+          sha1: commitSha,
+          repoOwner: env.GITHUB_REPOSITORY_OWNER,
+          repository: env.GITHUB_REPOSITORY,
+          oauthToken: "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"
+      }
     }
   }
 }
-
-
-//             post {
-//                 success {
-//                   script {
-//                     def github = getGitHub()
-//                     github.notifyCommitStatus(
-//                       commitSha1: env.GIT_COMMIT,
-//                       state: 'SUCCESS',
-//                       context: 'Jenkins',
-//                       description: 'Build passed')
-//                   }
-//                 }
-//                 failure {
-//                   script {
-//                     def github = getGitHub()
-//                     github.notifyCommitStatus(
-//                       commitSha1: env.GIT_COMMIT,
-//                       state: 'FAILURE',
-//                       context: 'Jenkins',
-//                       description: 'Build failed')
-//                   }
-//                 }
-//              }
-//   def getGitHub() {
-//     def gitUrl = sh(
-//       script: 'git config --get remote.origin.url',
-//       returnStdout: true
-//     ).trim()
-//     def credsId = 'github-creds' // the ID of the GitHub credentials in Jenkins
-//     return github(
-//       url: gitUrl,
-//       credentialsId: credsId
-//     )
-//   }
