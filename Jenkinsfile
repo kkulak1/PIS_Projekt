@@ -16,6 +16,7 @@ pipeline {
   }
   post {
     success {
+//         echo "${env.GITHUB_SHA}"
         githubNotify(
             status: 'SUCCESS',
             account: "kkulak1",
@@ -23,10 +24,11 @@ pipeline {
             context: 'Jenkins',
             description: 'Build failed',
             repo: "PIS_projekt",
-            sha: "${env.GITHUB_SHA}"
+            sha: env.GIT_COMMIT
         )
     }
     failure {
+//         echo "${env.GIT_COMMIT}"
           githubNotify(
             status: 'SUCCESS',
             account: "kkulak1",
@@ -34,7 +36,8 @@ pipeline {
             context: 'Jenkins',
             description: 'Build failed',
             repo: "PIS_projekt",
-            sha: "${env.GITHUB_SHA}"
+            sha: env.GIT_COMMIT
+
            )
       }
     }
