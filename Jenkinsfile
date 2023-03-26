@@ -1,6 +1,3 @@
-@Library('github.com/kohsuke/github-api') _
-import org.kohsuke.github.GitHub
-
 pipeline {
   agent any
 
@@ -27,35 +24,30 @@ pipeline {
   post {
     success  {
       script {
-        def gitHub = github()
-        gitHub.setCommitStatus(
-          context: "Jenkins",
-          state: "SUCCESS",
-          targetUrl: "${env.BUILD_URL}",
-          description: "Build Successful",
-          sha1: commitSha,
-          repoOwner: env.GITHUB_REPOSITORY_OWNER,
-          repository: env.GITHUB_REPOSITORY,
-          oauthToken: githubToken
+        def status = new GitHubStatus()
+        status.notifyBuildStatus(
+          status: "SUCCESS",
+          message: "Build Successful",
+          url: env.BUILD_URL,
+          gitUrl: gitUrl,
+          commitSha: commitSha,
+          githubToken: githubToken
         )
       }
     }
 
     failure  {
       script {
-        def gitHub = github()
-        gitHub.setCommitStatus(
-          context: "Jenkins",
-          state: "FAILURE",
-          targetUrl: "${env.BUILD_URL}",
-          description: "Build Failed",
-          sha1: commitSha,
-          repoOwner: env.GITHUB_REPOSITORY_OWNER,
-          repository: env.GITHUB_REPOSITORY,
-          oauthToken: githubToken
+        def status = new GitHubStatus()
+        status.notifyBuildStatus(
+          status: "FAILURE",
+          message: "Build Failed",
+          url: env.BUILD_URL,
+          gitUrl: gitUrl,
+          commitSha: commitSha,
+          githubToken: githubToken
         )
       }
     }
   }
 }
-
