@@ -17,23 +17,23 @@ pipeline {
   post {
     success {
         githubNotify(
-            status: 'FAILURE',
+            status: 'SUCCESS',
             account: "kkulak1",
             credentialsId: "github",
             context: 'Jenkins',
             description: 'Build failed',
-            repo: "Default"
-         )
+            repo: "PIS_projekt"
+        )
     }
-    failure {
-          githubNotify(
-            status: 'FAILURE',
-            account: "kkulak1",
-            credentialsId: "github",
-            context: 'Jenkins',
-            description: 'Build failed',
-            repo: "Default"
-           )
-      }
+//     failure {
+//           githubNotify(
+//             status: 'FAILURE',
+//             account: "kkulak1",
+//             credentialsId: "github",
+//             context: 'Jenkins',
+//             description: 'Build failed',
+//             repo: "Default"
+//            )
+//       }
     }
   }
