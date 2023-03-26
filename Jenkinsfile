@@ -24,9 +24,9 @@ pipeline {
   post {
     success {
       script {
-        echo giturl
+        echo gitUrl
         echo env.github_repo_owner
-        echo commitsha
+        echo commitSha
 //         if (env.GITHUB_REPO_OWNER) {
 //           githubNotify(
 //             status: 'SUCCESS',
