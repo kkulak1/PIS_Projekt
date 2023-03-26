@@ -31,7 +31,7 @@ pipeline {
             context: 'Jenkins',
             description: 'Build successful',
             repo: gitUrl,
-            credentialsId: "github-token",
+            credentialsId: "github",
             account: env.GITHUB_REPO_OWNER,
             sha: commitSha
           )
@@ -48,7 +48,7 @@ pipeline {
             context: 'Jenkins',
             description: 'Build failed',
             repo: gitUrl,
-            credentialsId: "github-token",
+            credentialsId: "github",
             account: env.GITHUB_REPO_OWNER,
             sha: commitSha
           )
