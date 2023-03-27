@@ -1,43 +1,42 @@
 pipeline {
-  agent any
+    agent any
 
-  tools {
-      jdk 'jdk-17'
-      maven "M3"
-      git "Default"
-  }
-
-  stages {
-    stage('Build') {
-      steps {
-        sh "mvn verify"
-      }
+    tools {
+        jdk 'jdk-17'
+        maven "M3"
+        git "Default"
     }
-  }
-  post {
-    success {
-        githubNotify(
-            status: 'SUCCESS',
-            account: "kkulak1",
-            credentialsId: "github",
-            context: 'Jenkins',
-            description: 'Build failed',
-            repo: "PIS_projekt",
-            sha: env.GIT_COMMIT
-        )
-    }
-    failure {
-          githubNotify(
-            status: 'FAILURE',
-            account: "kkulak1",
-            credentialsId: "github",
-            context: 'Jenkins',
-            description: 'Build failed',
-            repo: "PIS_projekt",
-            sha: env.GIT_COMMIT
 
-           )
-      }
+    stages {
+        stage('Build') {
+            steps {
+                sh "mvn verify"
+            }
+        }
     }
-  }
 
+    post {
+        success {
+            githubNotify(
+                status: 'SUCCESS',
+                account: "kkulak1",
+                credentialsId: "github",
+                context: 'Jenkins',
+                description: 'Build failed',
+                repo: "PIS_projekt",
+                sha: env.GIT_COMMIT
+            )
+        }
+        failure {
+            githubNotify(
+                status: 'FAILURE',
+                account: "kkulak1",
+                credentialsId: "github",
+                context: 'Jenkins',
+                description: 'Build failed',
+                repo: "PIS_projekt",
+                sha: env.GIT_COMMIT
+            )
+        }
+    }
+}

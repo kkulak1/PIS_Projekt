@@ -1,50 +1,52 @@
 pipeline {
-  agent any
+    agent any
 
-  tools {
-      jdk 'jdk-17'
-      maven "M3"
-      git "Default"
-  }
+    tools {
+        jdk 'jdk-17'
+        maven "M3"
+        git "Default"
+    }
 
-  stages {
-    stage("Cleaning") {
-        steps {
-            sh "mvn clean"
+    stages {
+        stage("Cleaning") {
+            steps {
+                sh "mvn clean"
+            }
         }
-    }
-    // stage('Building') {
-    //     steps {
-    //         sh "mvn deploy"
-    //     }
-    // }
-  }
-  when {
-    githubPullRequest sourceBranch: 'main', targetBranch: 'main', merged: true
-  }
-  post {
-    success {
-        githubNotify(
-            status: 'SUCCESS',
-            account: "kkulak1",
-            credentialsId: "github",
-            context: 'merge pipeline',
-            description: 'Build failed',
-            repo: "PIS_projekt",
-            sha: env.GIT_COMMIT
-        )
-    }
-    failure {
-          githubNotify(
-            status: 'FAILURE',
-            account: "kkulak1",
-            credentialsId: "github",
-            context: 'merge pipeline',
-            description: 'Build failed',
-            repo: "PIS_projekt",
-            sha: env.GIT_COMMIT
 
-           )
-      }
+        // stage('Building') {
+        //     steps {
+        //         sh "mvn deploy"
+        //     }
+        // }
+    }
+
+    when {
+        githubPullRequest sourceBranch: 'main', targetBranch: 'main', merged: true
+    }
+
+    post {
+        success {
+            githubNotify(
+                status: 'SUCCESS',
+                account: "kkulak1",
+                credentialsId: "github",
+                context: 'merge pipeline',
+                description: 'Build failed',
+                repo: "PIS_projekt",
+                sha: env.GIT_COMMIT
+            )
+        }
+        failure {
+            githubNotify(
+                status: 'FAILURE',
+                account: "kkulak1",
+                credentialsId: "github",
+                context: 'merge pipeline',
+                description: 'Build failed',
+                repo: "PIS_projekt",
+                sha: env.GIT_COMMIT
+            )
+        }
     }
 }
