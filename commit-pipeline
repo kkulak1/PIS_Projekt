@@ -8,56 +8,36 @@ pipeline {
   }
 
   stages {
-    stage("Cleaning") {
-        steps {
-            sh "mvn clean"
-        }
-    }
-
-    stage('Building') {
-        steps {
-            sh "mvn compile"
-        }
+    stage('Build') {
+      steps {
+        sh "mvn verify"
+      }
     }
   }
   post {
-    success  {
-        echo "triumph"
+    success {
+        githubNotify(
+            status: 'SUCCESS',
+            account: "kkulak1",
+            credentialsId: "github",
+            context: 'Jenkins',
+            description: 'Build failed',
+            repo: "PIS_projekt",
+            sha: env.GIT_COMMIT
+        )
+    }
+    failure {
+          githubNotify(
+            status: 'FAILURE',
+            account: "kkulak1",
+            credentialsId: "github",
+            context: 'Jenkins',
+            description: 'Build failed',
+            repo: "PIS_projekt",
+            sha: env.GIT_COMMIT
+
+           )
+      }
     }
   }
-}
 
-
-//             post {
-//                 success {
-//                   script {
-//                     def github = getGitHub()
-//                     github.notifyCommitStatus(
-//                       commitSha1: env.GIT_COMMIT,
-//                       state: 'SUCCESS',
-//                       context: 'Jenkins',
-//                       description: 'Build passed')
-//                   }
-//                 }
-//                 failure {
-//                   script {
-//                     def github = getGitHub()
-//                     github.notifyCommitStatus(
-//                       commitSha1: env.GIT_COMMIT,
-//                       state: 'FAILURE',
-//                       context: 'Jenkins',
-//                       description: 'Build failed')
-//                   }
-//                 }
-//              }
-//   def getGitHub() {
-//     def gitUrl = sh(
-//       script: 'git config --get remote.origin.url',
-//       returnStdout: true
-//     ).trim()
-//     def credsId = 'github-creds' // the ID of the GitHub credentials in Jenkins
-//     return github(
-//       url: gitUrl,
-//       credentialsId: credsId
-//     )
-//   }
