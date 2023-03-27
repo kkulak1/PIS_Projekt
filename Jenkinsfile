@@ -8,17 +8,35 @@ pipeline {
     }
 
     stages {
-        stage("Cleaning") {
+        stage('Build') {
             steps {
-                sh "ls"
-                sh "mvn clean"
+                sh "mvn verify"
             }
         }
+    }
 
-        stage('Building') {
-            steps {
-                sh "mvn compile"
-            }
+    post {
+        success {
+            githubNotify(
+                status: 'SUCCESS',
+                account: "kkulak1",
+                credentialsId: "github",
+                context: 'Jenkins',
+                description: 'Build failed',
+                repo: "PIS_projekt",
+                sha: env.GIT_COMMIT
+            )
+        }
+        failure {
+            githubNotify(
+                status: 'FAILURE',
+                account: "kkulak1",
+                credentialsId: "github",
+                context: 'Jenkins',
+                description: 'Build failed',
+                repo: "PIS_projekt",
+                sha: env.GIT_COMMIT
+            )
         }
     }
 }
