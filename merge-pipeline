@@ -21,32 +21,32 @@ pipeline {
         }
     }
 
-//    when {
-//        githubPullRequest sourceBranch: 'main', targetBranch: 'main', merged: true
-//    }
-//
-//    post {
-//        success {
-//            githubNotify(
-//                status: 'SUCCESS',
-//                account: "kkulak1",
-//                credentialsId: "github",
-//                context: 'merge pipeline',
-//                description: 'Build failed',
-//                repo: "PIS_projekt",
-//                sha: env.GIT_COMMIT
-//            )
-//        }
-//        failure {
-//            githubNotify(
-//                status: 'FAILURE',
-//                account: "kkulak1",
-//                credentialsId: "github",
-//                context: 'merge pipeline',
-//                description: 'Build failed',
-//                repo: "PIS_projekt",
-//                sha: env.GIT_COMMIT
-//            )
-//        }
-//    }
+    when {
+        githubPullRequest sourceBranch: 'main', targetBranch: 'main', merged: true
+    }
+
+    post {
+        success {
+            githubNotify(
+                status: 'SUCCESS',
+                account: "kkulak1",
+                credentialsId: "github",
+                context: 'merge pipeline',
+                description: 'Build failed',
+                repo: "PIS_projekt",
+                sha: env.GIT_COMMIT
+            )
+        }
+        failure {
+            githubNotify(
+                status: 'FAILURE',
+                account: "kkulak1",
+                credentialsId: "github",
+                context: 'merge pipeline',
+                description: 'Build failed',
+                repo: "PIS_projekt",
+                sha: env.GIT_COMMIT
+            )
+        }
+    }
 }
