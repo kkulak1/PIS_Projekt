@@ -21,9 +21,9 @@ pipeline {
         // }
     }
 
-    when {
-        githubPullRequest sourceBranch: 'main', targetBranch: 'main', merged: true
-    }
+    // when {
+    //     githubPullRequest sourceBranch: 'main', targetBranch: 'main', merged: true
+    // }
 
     post {
         success {
