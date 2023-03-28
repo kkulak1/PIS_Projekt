@@ -26,6 +26,7 @@ pipeline {
                 sha: env.GIT_COMMIT
             )
         }
+
         failure {
             githubNotify(
                 status: 'FAILURE',
