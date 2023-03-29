@@ -9,22 +9,27 @@ pipeline {
 
     triggers {
         githubPullRequests(
-            autoCloseFailedPullRequests: true,
+            autoCloseFailedPr: true,
             approveIfSuccess: true,
-            branches: '.*',
-            onlyTriggerPhrase: '',
             orgWhitelist: '',
             orgBlacklist: '',
-            skipBuildPhrase: '',
             triggerPhrase: '',
+            onlyTriggerPhrase: '',
+            skipBuildPhrase: '',
+            branches: 'main',
             allowMembersOfWhitelistedOrgsAsAdmin: false,
             extensions: [
                 [
-                    $class: 'StatusFilterExtension',
-                    statuses: [
-                        [context: 'continuous-integration/jenkins/pr-merge', state: 'FAILURE'],
-                        [context: 'continuous-integration/jenkins/pr-merge', state: 'SUCCESS']
-                    ]
+                    $class: 'CommentAdded',
+                    commentBody: 'retest this please',
+                    context: '',
+                    triggeredStatus: 'STARTED'
+                ],
+                [
+                    $class: 'PretestedIntegration'
+                ],
+                [
+                    $class: 'MergePullRequest'
                 ]
             ]
         )
