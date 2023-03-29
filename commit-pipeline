@@ -14,7 +14,6 @@ pipeline {
             }
         }
     }
-
     post {
         success {
             githubNotify(
@@ -27,6 +26,7 @@ pipeline {
                 sha: env.GIT_COMMIT
             )
         }
+
         failure {
             githubNotify(
                 status: 'FAILURE',
@@ -40,3 +40,4 @@ pipeline {
         }
     }
 }
+
