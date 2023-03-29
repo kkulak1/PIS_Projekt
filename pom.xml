@@ -82,28 +82,16 @@
 			</plugin>
 		</plugins>
 
-<!--		<extensions>-->
-<!--			&lt;!&ndash; Enabling the use of SSH &ndash;&gt;-->
-<!--			<extension>-->
-<!--				<groupId>org.apache.maven.wagon</groupId>-->
-<!--				<artifactId>wagon-ssh-external</artifactId>-->
-<!--				<version>1.0-beta-6</version>-->
-<!--			</extension>-->
-<!--		</extensions>-->
-
 	</build>
 
-<!--	DO przerobienia-->
 	<distributionManagement>
 		<repository>
 			<id>nexus-site</id>
-<!--			<url>scpexe://localhost:8081/repository/maven-releases/</url>-->
 			<url>http://localhost:8081/repository/maven-releases/</url>
 		</repository>
 
 		<snapshotRepository>
 			<id>nexus-snapshot-site</id>
-<!--			<url>scpexe://localhost:8081/repository/maven-snapshots/</url>-->
 			<url>http://localhost:8081/repository/maven-snapshots/</url>
 		</snapshotRepository>
 	</distributionManagement>
