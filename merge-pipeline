@@ -9,13 +9,14 @@ pipeline {
 
     triggers {
         githubPullRequests(
-            autoCloseFailedPullRequests: true,
-            autoMergePassedPullRequests: true,
-            branches: [[compareType: 'STRICT', pattern: 'main']],
-            events: [PULL_REQUEST_MERGED],
-            triggerPhrase: ''
+            autoCloseFailedPr: true,
+            mergeOnSuccess: true,
+            branches: 'main',
+            events: [pullRequestMerged()],
+            onlyTriggerPhrase: ''
         )
     }
+
 
     stages {
         stage('Deploying') {
