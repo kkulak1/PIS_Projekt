@@ -6,11 +6,6 @@ pipeline {
         git "Default"
     }
     stages {
-        stage('Build') {
-            steps {
-                sh 'mvn clean package'
-            }
-        }
         stage('Deployment') {
             steps {
                 sh 'mvn deploy'
