@@ -35,8 +35,6 @@ pipeline {
         )
     }
 
-
-
     stages {
         stage('Deploying') {
             steps {
