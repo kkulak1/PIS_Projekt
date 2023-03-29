@@ -28,17 +28,16 @@ pipeline {
                 repo: "PIS_projekt",
                 sha: env.GIT_COMMIT
             )
+
+            githubPullRequest(
+                autoCloseFailedPr: true,
+                approveIfSuccess: true,
+                branches: '*/main',
+                extensions: [
+                    $class: 'BuildStatusSettings',
+                    usingCrumb: true
+                ]
+            )
         }
-    }
-    options {
-        githubPullRequest(
-            autoCloseFailedPr: true,
-            approveIfSuccess: true,
-            branches: '*/main',
-            extensions: [
-                $class: 'BuildStatusSettings',
-                usingCrumb: true
-            ]
-        )
     }
 }
