@@ -23,7 +23,7 @@ pipeline {
                 status: currentBuild.result == 'SUCCESS' ? 'SUCCESS' : 'FAILURE',
                 account: "kkulak1",
                 credentialsId: "github",
-                context: 'continuous-integration/jenkins'
+                context: 'continuous-integration/jenkins',
                 description: 'Build failed',
                 repo: "PIS_projekt",
                 sha: env.GIT_COMMIT
@@ -42,4 +42,3 @@ pipeline {
         )
     }
 }
-
