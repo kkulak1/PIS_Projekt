@@ -8,7 +8,7 @@ pipeline {
     }
 
     triggers {
-        githubPullRequest(
+        githubPullRequests(
             autoCloseFailedPullRequests: true,
             autoMergePassedPullRequests: true,
             branches: [[compareType: 'STRICT', pattern: 'main']],
