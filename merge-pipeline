@@ -21,8 +21,12 @@ pipeline {
         always {
             githubNotify(
                 status: currentBuild.result == 'SUCCESS' ? 'SUCCESS' : 'FAILURE',
-                message: "Build finished with status ${currentBuild.result}",
+                account: "kkulak1",
+                credentialsId: "github",
                 context: 'continuous-integration/jenkins'
+                description: 'Build failed',
+                repo: "PIS_projekt",
+                sha: env.GIT_COMMIT
             )
         }
     }
