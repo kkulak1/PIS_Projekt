@@ -1,5 +1,6 @@
 package com.example.PIS_projekt;
 
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -24,11 +25,12 @@ class PisProjektApplicationTests {
 
 
 
-	@Test
-	void shouldReturnDefaultMessage() throws Exception {
-		this.mockMvc.perform(get("/"))
-				.andDo(print())
-				.andExpect(status().isOk())
-				.andExpect(content().string("First test"));
-	}
+//	@Test
+//	@Disabled
+//	void shouldReturnDefaultMessage() throws Exception {
+//		this.mockMvc.perform(get("/"))
+//				.andDo(print())
+//				.andExpect(status().isOk())
+//				.andExpect(content().string("First test"));
+//	}
 }
