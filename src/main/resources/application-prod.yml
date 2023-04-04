@@ -16,6 +16,8 @@ spring:
         dialect: org.hibernate.dialect.PostgreSQLDialect
         format_sql: true
     show-sql: true
+  application:
+    name: eurekaclient
 
   mail:
     host: localhost
@@ -34,3 +36,10 @@ spring:
           connectiontimeout: 5000
           timeout: 3000
           writetimeout: 5000
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka
+    instance:
+    preferIpAddress: true
