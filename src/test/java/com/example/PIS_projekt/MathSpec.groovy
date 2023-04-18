@@ -17,4 +17,19 @@ class MathSpec extends Specification {
         then:
         result == 5
     }
+
+    def "addition of two numbers"() {
+        given:
+        def a = 2
+        def b = 3
+
+        when:
+        def result = a * b
+
+        then:
+        result == 6
+    }
+
+
+
 }
