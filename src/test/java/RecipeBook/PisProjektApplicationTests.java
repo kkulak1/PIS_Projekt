@@ -1,4 +1,4 @@
-package com.example.PIS_projekt;
+package RecipeBook;
 
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;

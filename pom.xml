@@ -14,7 +14,7 @@
 	<artifactId>pis-project-ak-hb-kk-tm</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 
-	<name>PIS_projekt</name>
+	<name>RecipeBook</name>
 	<description>Demo project for Spring Boot</description>
 	<properties>
 		<java.version>17</java.version>

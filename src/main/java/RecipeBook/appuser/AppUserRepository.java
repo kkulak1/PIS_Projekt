@@ -1,4 +1,4 @@
-package com.example.PIS_projekt.appuser;
+package RecipeBook.appuser;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;

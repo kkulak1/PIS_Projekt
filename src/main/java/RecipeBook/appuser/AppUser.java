@@ -1,4 +1,4 @@
-package com.example.PIS_projekt.appuser;
+package RecipeBook.appuser;
 
 import jakarta.persistence.*;
 
