@@ -1,0 +1,28 @@
+pipeline {
+  agent any
+
+  tools {
+      jdk 'jdk-17'
+      maven "M3"
+      git "Default"
+  }
+
+  stages {
+    stage("Cleaning") {
+        steps {
+            sh "mvn clean"
+        }
+    }
+
+    stage('Building') {
+        steps {
+            sh "mvn compile"
+        }
+    }
+  }
+  post {
+    success  {
+        echo "triumph"
+    }
+  }
+}
