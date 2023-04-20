@@ -18,7 +18,7 @@ class MathSpec extends Specification {
         result == 5
     }
 
-    def "addition of two numbers"() {
+    def "multiplication of two numbers"() {
         given:
         def a = 2
         def b = 3
