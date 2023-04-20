@@ -1,5 +1,6 @@
 package RecipeBook;
 
+import RecipeBook.appuser.AppUserController;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,11 +21,9 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @AutoConfigureMockMvc
 class PisProjektApplicationTests {
 
-	@Autowired
-	private MockMvc mockMvc;
-
-
-
+//	@Autowired
+//	private MockMvc mockMvc;
+//
 //	@Test
 //	@Disabled
 //	void shouldReturnDefaultMessage() throws Exception {
@@ -33,4 +32,6 @@ class PisProjektApplicationTests {
 //				.andExpect(status().isOk())
 //				.andExpect(content().string("First test"));
 //	}
+	@Autowired(required = false)
+	private AppUserController appUserController;
 }
