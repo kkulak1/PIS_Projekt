@@ -19,6 +19,10 @@ target/
 *.iml
 *.ipr
 
+### Diagram files
+*.bkp
+*.dtmp
+
 ### NetBeans ###
 /nbproject/private/
 /nbbuild/
@@ -31,6 +35,3 @@ build/
 
 ### VS Code ###
 .vscode/
-
-#
-*.bkp
