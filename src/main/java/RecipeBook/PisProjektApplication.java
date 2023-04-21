@@ -7,6 +7,9 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.HashMap;
+import java.util.Map;
+
 @EnableFeignClients
 @EnableDiscoveryClient
 @SpringBootApplication
@@ -19,5 +22,14 @@ public class PisProjektApplication {
 	@GetMapping("/")
 	public String firstTest() {
 		return "First test";
+	}
+
+	@GetMapping("/test-json")
+	public Map<String, String> jsonTest() {
+		HashMap<String, String> map = new HashMap<>();
+		map.put("key", "value");
+		map.put("foo", "bar");
+		map.put("aa", "bb");
+		return map;
 	}
 }

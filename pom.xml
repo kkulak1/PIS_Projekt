@@ -139,6 +139,57 @@
 				</configuration>
 			</plugin>
 
+<!--			<plugin>-->
+<!--				<groupId>com.google.cloud.tools</groupId>-->
+<!--				<artifactId>jib-maven-plugin</artifactId>-->
+<!--				<version>3.2.0</version>-->
+<!--				<configuration>-->
+<!--					<to>-->
+<!--						<image>http://localhost:8081/repository/docker-image/${project.artifactId}:${project.version}</image>-->
+<!--					</to>-->
+<!--				</configuration>-->
+<!--				<executions>-->
+<!--					<execution>-->
+<!--						<phase>deploy</phase>-->
+<!--						<goals>-->
+<!--							<goal>build</goal>-->
+<!--						</goals>-->
+<!--					</execution>-->
+<!--				</executions>-->
+<!--			</plugin>-->
+
+<!--			<plugin>-->
+<!--				<groupId>org.eclipse.jkube</groupId>-->
+<!--				<artifactId>kubernetes-maven-plugin</artifactId>-->
+<!--				<extensions>true</extensions>-->
+<!--				<configuration>-->
+<!--					<images>-->
+<!--						<image>-->
+<!--							<name>http://localhost:8081/repository/docker-image/${project.artifactId}:${project.version}</name>-->
+<!--							<build>-->
+<!--								<from>-->
+<!--									<image>openjdk:8-jdk-alpine</image>-->
+<!--								</from>-->
+<!--								<entryPoint>-->
+<!--									<exec>-->
+<!--										<arg>java</arg>-->
+<!--										<arg>-jar</arg>-->
+<!--										<arg>/app.jar</arg>-->
+<!--									</exec>-->
+<!--								</entryPoint>-->
+<!--								<resources>-->
+<!--									<resource>-->
+<!--										<targetPath>/</targetPath>-->
+<!--										<directory>${project.build.directory}</directory>-->
+<!--										<include>${project.build.finalName}.jar</include>-->
+<!--									</resource>-->
+<!--								</resources>-->
+<!--							</build>-->
+<!--						</image>-->
+<!--					</images>-->
+<!--				</configuration>-->
+<!--			</plugin>-->
+
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-surefire-plugin</artifactId>
