@@ -22,6 +22,7 @@ target/
 ### Diagram files
 *.bkp
 *.dtmp
+*.drawio
 
 ### NetBeans ###
 /nbproject/private/
