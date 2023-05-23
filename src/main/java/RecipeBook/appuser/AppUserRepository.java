@@ -10,5 +10,7 @@ import java.util.Optional;
 @Transactional(readOnly = true)
 public interface AppUserRepository extends JpaRepository<AppUser, Long> {
     Optional<AppUser> findById(Long id);
+    Optional<AppUser> findByEmail(String email);
     void deleteAppUserById(Long id);
+
 }
