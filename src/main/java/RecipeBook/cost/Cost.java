@@ -22,7 +22,6 @@ public class Cost {
             name = "ingredient_id"
     )
     private Ingredient ingredient;
-
     private Long costvalue;
     private String costUnit;
 }

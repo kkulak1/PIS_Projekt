@@ -15,20 +15,23 @@ import java.util.List;
 @Builder
 @AllArgsConstructor
 public class AppUser implements UserDetails {
+    @Id
+    @GeneratedValue(
+            strategy = GenerationType.SEQUENCE,
+            generator = "app_user_sequence"
+    )
     @SequenceGenerator(
-            name = "user_sequence",
-            sequenceName = "user_sequence",
+            name = "app_user_sequence",
+            sequenceName = "app_user_sequence",
             allocationSize = 1
     )
-    @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
 
     private String firstName;
     private String lastName;
     private String email;
     private String password;
-    @Enumerated
+    @Enumerated(EnumType.STRING)
     private AppUserRole appUserRole;
 
     @Override
