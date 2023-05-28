@@ -2,6 +2,8 @@ package RecipeBook.recipe;
 
 import RecipeBook.appuser.AppUser;
 import RecipeBook.appuser.AppUserService;
+import RecipeBook.duration.Duration;
+import RecipeBook.duration.DurationService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -12,6 +14,7 @@ import java.util.Objects;
 public class RecipeService {
     private final RecipeRepository recipeRepository;
     private final AppUserService appUserService;
+    private final DurationService durationService;
 
     public Recipe addRecipe(RecipeRequest request) {
 
@@ -46,4 +49,12 @@ public class RecipeService {
             throw new RecipeNotFoundException(request.getId());
     }
 
+    public String changeDuration(DurationRequest durationRequest) {
+        Duration duration = durationService.findDurationByRecipe(durationRequest.getRecipe());
+
+        duration.setAmountOfTime(durationRequest.getNewTime());
+
+        return "ok";
+    }
 }
+

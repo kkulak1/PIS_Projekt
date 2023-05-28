@@ -3,6 +3,11 @@ package RecipeBook.recipe;
 import lombok.RequiredArgsConstructor;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/api/v1/recipe")
@@ -25,4 +30,11 @@ public class RecipeController {
         recipeService.deleteRecipeById(request);
         return "Deleted successfully";
     }
+
+
+    @PutMapping("/change-duration")
+    public ResponseEntity<String> changeDuration(@RequestBody DurationRequest durationRequest){
+        return ResponseEntity.ok(recipeService.changeDuration(durationRequest));
+    }
 }
+
