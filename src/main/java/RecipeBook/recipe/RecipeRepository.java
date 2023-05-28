@@ -7,4 +7,6 @@ import org.springframework.transaction.annotation.Transactional;
 @Repository
 @Transactional(readOnly = true)
 public interface RecipeRepository extends JpaRepository<Recipe, Long> {
+
+    Recipe findRecipeById(Long id);
 }
