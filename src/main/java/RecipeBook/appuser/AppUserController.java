@@ -13,10 +13,4 @@ public interface AppUserController {
     public static String testing() {
         return "worked";
     }
-
-//    @RequestMapping(value = "/login", method = RequestMethod.POST)
-//    public String login(String firstName) {
-//
-//        return "token" + firstName;
-//    }
 }

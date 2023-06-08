@@ -13,7 +13,6 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 @RequiredArgsConstructor
 public class AppUserService {
     private final AppUserRepository appUserRepository;
-<<<<<<< HEAD
     private final JwtService jwtService;
 
     public AppUser findAppUserByUsername(String email) {
@@ -29,8 +28,4 @@ public class AppUserService {
 
         return appUser;
     }
-=======
-
-
->>>>>>> 1263913 (PIS-94 added changing recipe's duration)
 }

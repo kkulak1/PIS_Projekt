@@ -8,7 +8,6 @@ import lombok.*;
 @Getter
 @Setter
 @NoArgsConstructor
-@RequiredArgsConstructor
 @EqualsAndHashCode
 public class Recipe {
     @SequenceGenerator(

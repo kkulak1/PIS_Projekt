@@ -2,7 +2,6 @@ package RecipeBook.recipe;
 
 import RecipeBook.duration.DurationRequest;
 import lombok.RequiredArgsConstructor;
-import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PutMapping;
