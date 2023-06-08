@@ -30,13 +30,11 @@ public class Recipe {
     )
     private AppUser appUser;
 
-    String coverImagePath;
     String name;
     String description;
 
-    public Recipe(AppUser appUser, String coverImagePath, String name, String description) {
+    public Recipe(AppUser appUser, String name, String description) {
         this.appUser = appUser;
-        this.coverImagePath = coverImagePath;
         this.name = name;
         this.description = description;
     }

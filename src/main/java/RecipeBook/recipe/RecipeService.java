@@ -1,6 +1,7 @@
 package RecipeBook.recipe;
 
 import RecipeBook.appuser.AppUser;
+import RecipeBook.appuser.AppUserService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -10,14 +11,14 @@ import java.util.Objects;
 @AllArgsConstructor
 public class RecipeService {
     private final RecipeRepository recipeRepository;
+    private final AppUserService appUserService;
 
     public Recipe addRecipe(RecipeRequest request) {
-//        AppUser appUser = getUserFromJWT();
-        AppUser appUser = new AppUser();
+
+        AppUser appUser = appUserService.getCurrentUser();
 
         Recipe newRecipe = new Recipe(
                 appUser,
-                request.getCoverImagePath(),
                 request.getName(),
                 request.getDescription());
 

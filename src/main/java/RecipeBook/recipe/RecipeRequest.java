@@ -9,7 +9,6 @@ import lombok.*;
 @EqualsAndHashCode
 @ToString
 public class RecipeRequest {
-    private String coverImagePath;
     private String name;
     private String description;
 }
