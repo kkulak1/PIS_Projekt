@@ -1,5 +1,6 @@
-package RecipeBook.recipe;
+package RecipeBook.duration;
 
+import RecipeBook.recipe.Recipe;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

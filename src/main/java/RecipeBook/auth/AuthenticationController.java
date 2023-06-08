@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/api/v1/auth")
-//@FeignClient(name = "backend", contextId = "/api/v1/auth")
 @RequiredArgsConstructor
 public class AuthenticationController {
 

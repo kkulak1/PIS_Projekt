@@ -3,6 +3,8 @@ package RecipeBook.recipe;
 import RecipeBook.appuser.AppUser;
 import RecipeBook.appuser.AppUserService;
 import RecipeBook.duration.Duration;
+import RecipeBook.duration.DurationRepository;
+import RecipeBook.duration.DurationRequest;
 import RecipeBook.duration.DurationService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -15,6 +17,7 @@ public class RecipeService {
     private final RecipeRepository recipeRepository;
     private final AppUserService appUserService;
     private final DurationService durationService;
+    private final DurationRepository durationRepository;
 
     public Recipe addRecipe(RecipeRequest request) {
 
@@ -53,6 +56,8 @@ public class RecipeService {
         Duration duration = durationService.findDurationByRecipe(durationRequest.getRecipe());
 
         duration.setAmountOfTime(durationRequest.getNewTime());
+
+        durationRepository.save(duration);
 
         return "ok";
     }
