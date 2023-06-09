@@ -30,4 +30,9 @@ public class Step {
             name = "recipe_id"
     )
     private Recipe recipe;
+
+    public Step(String steps, Recipe recipe) {
+        this.setSteps(steps);
+        this.setRecipe(recipe);
+    }
 }
