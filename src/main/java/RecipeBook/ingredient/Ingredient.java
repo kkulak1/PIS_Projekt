@@ -31,8 +31,13 @@ public class Ingredient {
     private Recipe recipe;
 
     private String type;
-    private Long amount;
-    private String unit;
     private String name;
     private String description;
+
+    public Ingredient(Recipe recipe, String type, String name, String description) {
+        this.recipe = recipe;
+        this.type = type;
+        this.name = name;
+        this.description = description;
+    }
 }
