@@ -23,7 +23,7 @@ public class Quantity {
     )
     private Long id;
 
-    private Long quantityValue;
+    private float quantityValue;
     private String quantityUnit;
 
     @OneToOne
@@ -32,4 +32,10 @@ public class Quantity {
             name = "ingredient_id"
     )
     private Ingredient ingredient;
+
+    public Quantity(float quantityValue, String quantityUnit, Ingredient ingredient) {
+        this.quantityValue = quantityValue;
+        this.quantityUnit = quantityUnit;
+        this.ingredient = ingredient;
+    }
 }
