@@ -2,6 +2,7 @@ package RecipeBook.cost;
 
 import RecipeBook.ingredient.Ingredient;
 import jakarta.persistence.*;
+import java.math.BigDecimal;
 
 public class Cost {
     @SequenceGenerator(
@@ -22,6 +23,6 @@ public class Cost {
             name = "ingredient_id"
     )
     private Ingredient ingredient;
-    private Long costvalue;
+    private BigDecimal costValue;
     private String costUnit;
 }
