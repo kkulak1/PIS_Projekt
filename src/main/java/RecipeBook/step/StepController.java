@@ -1,5 +1,6 @@
 package RecipeBook.step;
 
+import RecipeBook.recipe.Recipe;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -13,4 +14,8 @@ public class StepController {
     @PutMapping("/change-steps")
     public Step changeStep(@RequestBody StepRequest request) { return stepService.changeStep(request); }
 
+    @GetMapping("/get")
+    public Step getStep(@RequestBody Recipe recipe) {
+        return stepService.getStep(recipe);
+    }
 }

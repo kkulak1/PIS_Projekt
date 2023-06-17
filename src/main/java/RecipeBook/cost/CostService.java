@@ -1,5 +1,6 @@
 package RecipeBook.cost;
 
+import RecipeBook.ingredient.Ingredient;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -40,5 +41,9 @@ public class CostService {
         updatedCost.setCostValue(cost.getCostValue());
 
         return costRepository.save(updatedCost);
+    }
+
+    public Cost getCost(Ingredient ingredient) {
+        return costRepository.getCostByIngredient(ingredient);
     }
 }

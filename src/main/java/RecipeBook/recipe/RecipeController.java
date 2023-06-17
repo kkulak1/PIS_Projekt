@@ -2,12 +2,15 @@ package RecipeBook.recipe;
 
 import RecipeBook.duration.DurationRequest;
 import lombok.RequiredArgsConstructor;
+import org.json.JSONObject;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
 
 @RestController
 @CrossOrigin
@@ -30,6 +33,16 @@ public class RecipeController {
     public String deleteRecipeById(@RequestBody RecipeDeleteRequest request) {
         recipeService.deleteRecipeById(request);
         return "Deleted successfully";
+    }
+
+    @GetMapping("/get")
+    public List<Recipe> getRecipeByUser() {
+        return recipeService.getRecipeByUser();
+    }
+
+    @GetMapping("/get-details")
+    public String getRecipeDetails(@RequestBody Recipe recipe) {
+        return recipeService.getRecipeDetails(recipe);
     }
 
 

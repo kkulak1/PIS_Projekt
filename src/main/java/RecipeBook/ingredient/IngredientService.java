@@ -1,8 +1,10 @@
 package RecipeBook.ingredient;
 
+import RecipeBook.recipe.Recipe;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -43,5 +45,9 @@ public class IngredientService {
         ingredientDB.setDescription(request.getDescription());
 
         return ingredientRepository.save(ingredientDB);
+    }
+
+    public List<Ingredient> getIngredients(Recipe recipe) {
+        return ingredientRepository.findAllByRecipe(recipe);
     }
 }

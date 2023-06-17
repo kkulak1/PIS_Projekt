@@ -1,5 +1,6 @@
 package RecipeBook.step;
 
+import RecipeBook.recipe.Recipe;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -23,6 +24,10 @@ public class StepService {
             step.setSteps(request.getSteps());
 
         return stepRepository.save(step);
+    }
+
+    public Step getStep(Recipe recipe) {
+        return stepRepository.findStepByRecipe(recipe);
     }
 
 }

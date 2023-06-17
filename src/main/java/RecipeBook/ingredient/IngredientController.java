@@ -1,7 +1,10 @@
 package RecipeBook.ingredient;
 
+import RecipeBook.recipe.Recipe;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @CrossOrigin
@@ -24,6 +27,11 @@ public class IngredientController {
     @PutMapping("/modify")
     public Ingredient modifyIngredient(@RequestBody IngredientModifyRequest request) {
         return ingredientService.modifyIngredient(request);
+    }
+
+    @GetMapping("/get")
+    public List<Ingredient> getIngredients(@RequestBody Recipe recipe) {
+        return ingredientService.getIngredients(recipe);
     }
 
 }

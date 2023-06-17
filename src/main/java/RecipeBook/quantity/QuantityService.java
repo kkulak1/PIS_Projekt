@@ -1,5 +1,6 @@
 package RecipeBook.quantity;
 
+import RecipeBook.ingredient.Ingredient;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -40,5 +41,9 @@ public class QuantityService {
         updatedQuantity.setQuantityUnit(quantity.getQuantityUnit());
 
         return quantityRepository.save(updatedQuantity);
+    }
+
+    public Quantity getQuantity(Ingredient ingredient) {
+        return quantityRepository.findQuantityByIngredient(ingredient);
     }
 }
