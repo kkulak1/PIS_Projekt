@@ -2,8 +2,16 @@ package RecipeBook.cost;
 
 import RecipeBook.ingredient.Ingredient;
 import jakarta.persistence.*;
+import lombok.*;
+
 import java.math.BigDecimal;
 
+@Entity
+@Getter
+@Setter
+@EqualsAndHashCode
+@NoArgsConstructor
+@AllArgsConstructor
 public class Cost {
     @SequenceGenerator(
             name = "cost_sequence",
@@ -25,4 +33,10 @@ public class Cost {
     private Ingredient ingredient;
     private BigDecimal costValue;
     private String costUnit;
+
+    public Cost(Ingredient ingredient, BigDecimal costValue, String costUnit) {
+        this.ingredient = ingredient;
+        this.costValue = costValue;
+        this.costUnit = costUnit;
+    }
 }
