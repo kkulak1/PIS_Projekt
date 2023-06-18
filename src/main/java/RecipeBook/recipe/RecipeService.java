@@ -122,6 +122,57 @@ public class RecipeService {
         return jsonString;
     }
 
+    public String getRecipeDetailsId(RecipeRequestId request) {
+        Recipe recipe = recipeRepository.findRecipeById(request.getId());
+        Step step = stepService.getStep(recipe);
+        List<Ingredient> ingredients = ingredientService.getIngredients(recipe);
+
+        Duration duration = new Duration();
+        try {
+            duration = durationService.findDurationByRecipe(recipe);
+        } catch (NotFoundException e) {
+            duration.setAmountOfTime(0L);
+        }
+
+        List<Quantity> quantities = new ArrayList<Quantity>();
+        for (Ingredient ingredient : ingredients) {
+            Quantity quantity = quantityService.getQuantity(ingredient);
+            if (quantity == null) {
+                quantity = new Quantity();
+                quantity.setQuantityValue(0);
+            }
+            quantities.add(quantity);
+        }
+
+        List<Cost> costs = new ArrayList<Cost>();
+        for (Ingredient ingredient : ingredients) {
+            Cost cost = costService.getCost(ingredient);
+            if (cost == null) {
+                cost = new Cost();
+                cost.setCostValue(BigDecimal.valueOf(0));
+            }
+            costs.add(cost);
+        }
+
+
+        if (step == null) {
+            step = new Step();
+            step.setSteps("");
+        }
+        if (ingredients.isEmpty())
+            ingredients = new ArrayList<Ingredient>();
+
+
+        String jsonString = new JSONObject()
+                .put("steps", step.getSteps())
+                .put("ingredients", ingredients)
+                .put("duration", duration.getAmountOfTime())
+                .put("quantities", quantities)
+                .put("costs", costs)
+                .toString();
+
+        return jsonString;
+    }
     public Duration addDuration(DurationAddRequest request) {
         Duration newDuration = new Duration(
                 request.getAmountOfTime(),
@@ -139,4 +190,5 @@ public class RecipeService {
 
         return durationRepository.save(duration);
     }
+
 }

@@ -47,6 +47,11 @@ public class RecipeController {
         return recipeService.getRecipeDetails(recipe);
     }
 
+    @GetMapping("/get-details-by-id")
+    public String getRecipeDetailsById(@RequestBody RecipeRequestId request) {
+        return recipeService.getRecipeDetailsId(request);
+    }
+
 
     @PostMapping("/add-duration")
     public Duration addDuration(@RequestBody DurationAddRequest request) {
