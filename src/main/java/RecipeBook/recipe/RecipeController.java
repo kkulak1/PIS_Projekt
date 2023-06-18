@@ -1,5 +1,7 @@
 package RecipeBook.recipe;
 
+import RecipeBook.duration.Duration;
+import RecipeBook.duration.DurationAddRequest;
 import RecipeBook.duration.DurationRequest;
 import lombok.RequiredArgsConstructor;
 import org.json.JSONObject;
@@ -46,9 +48,14 @@ public class RecipeController {
     }
 
 
+    @PostMapping("/add-duration")
+    public Duration addDuration(@RequestBody DurationAddRequest request) {
+        return recipeService.addDuration(request);
+    }
+
     @PutMapping("/change-duration")
-    public ResponseEntity<String> changeDuration(@RequestBody DurationRequest durationRequest){
-        return ResponseEntity.ok(recipeService.changeDuration(durationRequest));
+    public Duration changeDuration(@RequestBody DurationRequest durationRequest){
+        return recipeService.changeDuration(durationRequest);
     }
 }
 

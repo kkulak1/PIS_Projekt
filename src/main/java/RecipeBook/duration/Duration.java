@@ -23,8 +23,8 @@ public class Duration {
     )
     private Long id;
 
-    Long amountOfTime;
-    String Unit;
+    private Long amountOfTime;
+    private String unit;
 
     @OneToOne
     @JoinColumn(
@@ -32,4 +32,10 @@ public class Duration {
             name = "recipe_id"
     )
     private Recipe recipe;
+
+    public Duration(Long amountOfTime, String unit, Recipe recipe) {
+        this.amountOfTime = amountOfTime;
+        this.unit = unit;
+        this.recipe = recipe;
+    }
 }

@@ -4,10 +4,7 @@ import RecipeBook.appuser.AppUser;
 import RecipeBook.appuser.AppUserService;
 import RecipeBook.cost.Cost;
 import RecipeBook.cost.CostService;
-import RecipeBook.duration.Duration;
-import RecipeBook.duration.DurationRepository;
-import RecipeBook.duration.DurationRequest;
-import RecipeBook.duration.DurationService;
+import RecipeBook.duration.*;
 import RecipeBook.ingredient.Ingredient;
 import RecipeBook.ingredient.IngredientService;
 import RecipeBook.quantity.Quantity;
@@ -78,13 +75,12 @@ public class RecipeService {
         Step step = stepService.getStep(recipe);
         List<Ingredient> ingredients = ingredientService.getIngredients(recipe);
 
-//        Duration duration;
-//        try {
-//            duration = durationService.findDurationByRecipe(recipe);
-//        } catch (NotFoundException e) {
-//            duration = new Duration();
-//            duration.setAmountOfTime(0L);
-//        }
+        Duration duration = new Duration();
+        try {
+            duration = durationService.findDurationByRecipe(recipe);
+        } catch (NotFoundException e) {
+            duration.setAmountOfTime(0L);
+        }
 
         List<Quantity> quantities = new ArrayList<Quantity>();
         for (Ingredient ingredient : ingredients) {
@@ -118,7 +114,7 @@ public class RecipeService {
         String jsonString = new JSONObject()
                 .put("steps", step.getSteps())
                 .put("ingredients", ingredients)
-//                .put("duration", duration)
+                .put("duration", duration.getAmountOfTime())
                 .put("quantities", quantities)
                 .put("costs", costs)
                 .toString();
@@ -126,13 +122,21 @@ public class RecipeService {
         return jsonString;
     }
 
-    public String changeDuration(DurationRequest durationRequest) {
+    public Duration addDuration(DurationAddRequest request) {
+        Duration newDuration = new Duration(
+                request.getAmountOfTime(),
+                request.getUnit(),
+                request.getRecipe()
+        );
+
+        return durationRepository.save(newDuration);
+    }
+
+    public Duration changeDuration(DurationRequest durationRequest) {
         Duration duration = durationService.findDurationByRecipe(durationRequest.getRecipe());
 
         duration.setAmountOfTime(durationRequest.getNewTime());
 
-        durationRepository.save(duration);
-
-        return "ok";
+        return durationRepository.save(duration);
     }
 }
